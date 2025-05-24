@@ -85,8 +85,9 @@ class Trade < ApplicationRecord
 
   def update_profit_counter
     previous_total = self.class.order(created_at: :desc).first&.profit_counter || 0
+    current_amount = self.amount.to_d
     
-    self.profit_counter = previous_total + amount
+    self.profit_counter = previous_total + current_amount
   end
 
   def update_rate_counters

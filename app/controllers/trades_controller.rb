@@ -11,6 +11,6 @@ class TradesController < ApplicationController
   private
 
   def trade_params
-    params.expect(trade: [:taken_at, :position, :lot_size, :confidence, :result])
+    params.require(:trade).permit(:pair, :taken_at, :position, :lot_size, :confidence, :result, :amount)
   end
 end
