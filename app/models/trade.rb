@@ -1,11 +1,12 @@
 class Trade < ApplicationRecord
   def self.metrics
+    total = count
+    wins = where(result: "win").count
+    losses = where(result: "loss").count
+    
     {
-      total_trades: count,
-      win_rate: where(result: "win").count / count.to_f,
-      average_profit_factor: where(result: "win").average(:profit_factor),
-      average_win_rate: where(result: "win").average(:win_rate),
-      average_loss_rate: where(result: "loss").average(:loss_rate),
+      total_trades: total,
+      win_rate: total.positive? ? (wins.to_f / total) : 0,
     }
   end
 end
