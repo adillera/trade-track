@@ -11,7 +11,10 @@ class Trade < ApplicationRecord
       win_rate: latest_trade&.win_rate_counter || 0,
       loss_rate: latest_trade&.loss_rate_counter || 0,
       total_profit: latest_trade&.profit_counter || 0,
-      profit_factor: calculate_profit_factor
+      profit_factor: calculate_profit_factor,
+      high_confidence_win_rate: calculate_confidence_win_rate('high'),
+      medium_confidence_win_rate: calculate_confidence_win_rate('medium'),
+      low_confidence_win_rate: calculate_confidence_win_rate('low')
     }
   end
 
@@ -21,6 +24,14 @@ class Trade < ApplicationRecord
     winning_profits = where(result: "win").sum(:profit_counter)
     losing_profits = where(result: "loss").sum(:profit_counter).abs
     losing_profits.positive? ? (winning_profits / losing_profits) : 0
+  end
+
+  def self.calculate_confidence_win_rate(confidence_level)
+    confidence_trades = where(confidence: confidence_level)
+    return 0 if confidence_trades.empty?
+
+    confidence_wins = confidence_trades.where(result: 'win').count
+    confidence_wins.to_f / confidence_trades.count
   end
 
   def update_profit_counter

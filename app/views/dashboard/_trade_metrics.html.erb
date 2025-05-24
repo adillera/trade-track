@@ -4,7 +4,7 @@
       <div class="bg-white p-2 shadow-sm border border-gray-100">
         <h3 class="text-lg font-medium text-gray-900">Trade Metrics</h3>
         
-        <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="mt-4 grid grid-cols-2 md:grid-cols-2 gap-4">
           <div class="p-4 bg-gray-50 rounded-lg">
             <p class="text-sm text-gray-500">Total Trades</p>
             <p class="text-2xl font-semibold text-gray-900"><%= metrics[:total_trades] %></p>
@@ -14,12 +14,9 @@
             <p class="text-sm text-gray-500">Win Rate</p>
             <p class="text-2xl font-semibold text-gray-900"><%= number_to_percentage(metrics[:win_rate] * 100, precision: 1) %></p>
           </div>
+        </div>
 
-          <div class="p-4 bg-gray-50 rounded-lg">
-            <p class="text-sm text-gray-500">Loss Rate</p>
-            <p class="text-2xl font-semibold text-gray-900"><%= number_to_percentage(metrics[:loss_rate] * 100, precision: 1) %></p>
-          </div>
-
+        <div class="mt-4 grid grid-cols-2 md:grid-cols-2 gap-4">
           <div class="p-4 bg-gray-50 rounded-lg">
             <p class="text-sm text-gray-500">Total Profit</p>
             <p class="text-2xl font-semibold text-gray-900"><%= number_to_currency(metrics[:total_profit]) %></p>
@@ -28,6 +25,23 @@
           <div class="p-4 bg-gray-50 rounded-lg">
             <p class="text-sm text-gray-500">Profit Factor</p>
             <p class="text-2xl font-semibold text-gray-900"><%= number_with_precision(metrics[:profit_factor], precision: 2) %></p>
+          </div>
+        </div>
+
+        <div class="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <p class="text-sm text-gray-500">High Confidence Win Rate</p>
+            <p class="text-2xl font-semibold text-gray-900"><%= number_to_percentage(metrics[:high_confidence_win_rate] * 100, precision: 1) %></p>
+          </div>
+
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <p class="text-sm text-gray-500">Medium Confidence Win Rate</p>
+            <p class="text-2xl font-semibold text-gray-900"><%= number_to_percentage(metrics[:medium_confidence_win_rate] * 100, precision: 1) %></p>
+          </div>
+
+          <div class="p-4 bg-gray-50 rounded-lg">
+            <p class="text-sm text-gray-500">Low Confidence Win Rate</p>
+            <p class="text-2xl font-semibold text-gray-900"><%= number_to_percentage(metrics[:low_confidence_win_rate] * 100, precision: 1) %></p>
           </div>
         </div>
       </div>
