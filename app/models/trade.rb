@@ -14,6 +14,11 @@ class Trade < ApplicationRecord
     break_even: 'break_even'
   }, prefix: true
 
+  enum :position, {
+    long: 'long',
+    short: 'short'
+  }, prefix: true
+
   def self.metrics
     total = count
     latest_trade = order(created_at: :desc).first
@@ -21,7 +26,6 @@ class Trade < ApplicationRecord
     {
       total_trades: total,
       win_rate: latest_trade&.win_rate_counter || 0,
-      loss_rate: latest_trade&.loss_rate_counter || 0,
       total_profit: latest_trade&.profit_counter || 0,
       profit_factor: calculate_profit_factor,
       high_confidence_win_rate: calculate_confidence_win_rate('high'),
@@ -45,6 +49,14 @@ class Trade < ApplicationRecord
 
     confidence_wins = confidence_trades.where(result: 'win').count
     confidence_wins.to_f / confidence_trades.count
+  end
+
+  def self.calculate_position_win_rate(position_type)
+    position_trades = where(position: position_type)
+    return 0 if position_trades.empty?
+
+    position_wins = position_trades.where(result: 'win').count
+    position_wins.to_f / position_trades.count
   end
 
   def self.calculate_top_performing_pairs

@@ -84,7 +84,7 @@ trade_logs = [
   {
     "pair" => "AUD/USD",
     "taken_at" => "2025-05-23 14:53:02", 
-    "position" => "sell", 
+    "position" => "short", 
     "lot_size" => 1.90, 
     "confidence" => "high", 
     "result" => "win", 
@@ -93,7 +93,7 @@ trade_logs = [
   {
     "pair" => "AUD/USD",
     "taken_at" => "2025-05-23 15:08:00", 
-    "position" => "buy", 
+    "position" => "long", 
     "lot_size" => 1.90, 
     "confidence" => "high", 
     "result" => "win", 
@@ -102,7 +102,7 @@ trade_logs = [
   {
     "pair" => "AUD/USD",
     "taken_at" => "2025-05-23 15:38:58", 
-    "position" => "buy", 
+    "position" => "long", 
     "lot_size" => 1.27, 
     "confidence" => "high", 
     "result" => "win", 
@@ -111,7 +111,7 @@ trade_logs = [
   {
     "pair" => "AUD/USD",
     "taken_at" => "2025-05-23 16:45:14", 
-    "position" => "sell", 
+    "position" => "short", 
     "lot_size" => 1.27, 
     "confidence" => "low", 
     "result" => "loss", 
@@ -120,7 +120,7 @@ trade_logs = [
   {
     "pair" => "AUD/USD",
     "taken_at" => "2025-05-23 16:45:51", 
-    "position" => "sell", 
+    "position" => "short", 
     "lot_size" => 1.27, 
     "confidence" => "low", 
     "result" => "loss", 
@@ -129,7 +129,7 @@ trade_logs = [
   {
     "pair" => "USD/JPY",
     "taken_at" => "2025-05-23 17:23:01", 
-    "position" => "sell", 
+    "position" => "short", 
     "lot_size" => 1.27, 
     "confidence" => "high", 
     "result" => "win", 
