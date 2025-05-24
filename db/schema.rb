@@ -15,11 +15,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_24_060134) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "trades", force: :cascade do |t|
+    t.string "pair"
     t.datetime "taken_at"
     t.string "position"
     t.decimal "lot_size"
     t.string "confidence"
     t.string "result"
+    t.decimal "amount"
+    t.decimal "profit"
+    t.decimal "win_rate"
+    t.decimal "loss_rate"
+    t.decimal "profit_factor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

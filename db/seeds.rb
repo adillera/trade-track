@@ -136,3 +136,7 @@ trade_logs = [
     "amount" => 1.54,
   },
 ]
+
+trade_logs.each do |trade_log|
+  Trade.find_or_create_by!(trade_log)
+end
