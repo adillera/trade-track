@@ -18,6 +18,13 @@
 
     <div class="flex items-end gap-4">
       <div class="flex-1">
+        <%= form.label :pair, class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= form.text_field :pair, 
+            class: "w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out",
+            placeholder: "Enter pair" %>
+      </div>
+
+      <div class="flex-1">
         <%= form.label :taken_at, class: "block text-sm font-medium text-gray-700 mb-1" %>
         <%= form.datetime_field :taken_at, 
             class: "w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out" %>
@@ -53,6 +60,14 @@
             options_for_select([['Win', 'win'], ['Loss', 'loss'], ['Break Even', 'break_even']]), 
             { include_blank: 'Select result' }, 
             class: "w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out" %>
+      </div>
+
+      <div class="flex-1">
+        <%= form.label :amount, class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= form.number_field :amount, 
+            step: :any, 
+            class: "w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 transition duration-150 ease-in-out",
+            placeholder: "Enter amount" %>
       </div>
 
       <div>
