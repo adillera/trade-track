@@ -4,16 +4,14 @@ class Trade < ApplicationRecord
 
   def self.metrics
     total = count
-    wins = where(result: "win").count
-    losses = where(result: "loss").count
-    total_profit = sum(:profit)
-    winning_profits = where(result: "win").sum(:profit)
-    losing_profits = where(result: "loss").sum(:profit).abs
+    total_profit = sum(:profit_counter)
+    winning_profits = where(result: "win").sum(:profit_counter)
+    losing_profits = where(result: "loss").sum(:profit_counter).abs
     
     {
       total_trades: total,
-      win_rate: total.positive? ? (wins.to_f / total) : 0,
-      loss_rate: total.positive? ? (losses.to_f / total) : 0,
+      win_rate: first&.win_rate_counter || 0,
+      loss_rate: first&.loss_rate_counter || 0,
       total_profit: total_profit,
       profit_factor: losing_profits.positive? ? (winning_profits / losing_profits) : 0
     }
