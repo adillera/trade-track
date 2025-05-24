@@ -10,17 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_24_072823) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_24_080248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "confidence_level", ["high", "medium", "low"]
+  create_enum "trade_result", ["win", "loss", "break_even"]
 
   create_table "trades", force: :cascade do |t|
     t.string "pair"
     t.datetime "taken_at"
     t.string "position"
     t.decimal "lot_size"
-    t.string "confidence"
-    t.string "result"
+    t.enum "confidence", enum_type: "confidence_level"
+    t.enum "result", enum_type: "trade_result"
     t.decimal "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

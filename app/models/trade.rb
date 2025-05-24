@@ -2,6 +2,18 @@ class Trade < ApplicationRecord
   before_save :update_profit_counter
   after_save :update_rate_counters
 
+  enum :confidence, {
+    high: 'high',
+    medium: 'medium',
+    low: 'low'
+  }, prefix: true
+
+  enum :result, {
+    win: 'win',
+    loss: 'loss',
+    break_even: 'break_even'
+  }, prefix: true
+
   def self.metrics
     total = count
     latest_trade = order(created_at: :desc).first
