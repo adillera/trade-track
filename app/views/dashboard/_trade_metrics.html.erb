@@ -16,14 +16,17 @@
           </div>
 
           <div class="p-4 bg-gray-50 rounded-lg">
-            <p class="text-sm text-gray-500">Best Performing Pair</p>
-            <div class="flex items-center justify-between">
-              <p class="text-2xl font-semibold text-gray-900"><%= metrics[:best_performing_pair][:pair] %></p>
-              <div class="text-right">
-                <p class="text-sm text-gray-500">Win Rate</p>
-                <p class="text-xl font-semibold text-gray-900"><%= number_to_percentage(metrics[:best_performing_pair][:win_rate] * 100, precision: 1) %></p>
-                <p class="text-sm text-gray-500">Total Trades: <%= metrics[:best_performing_pair][:total_trades] %></p>
-              </div>
+            <p class="text-sm text-gray-500">Top Performing Pairs</p>
+            <div class="space-y-2">
+              <% metrics[:top_performing_pairs].each do |pair_stats| %>
+                <div class="flex items-center justify-between">
+                  <p class="text-sm font-medium text-gray-900"><%= pair_stats[:pair] %></p>
+                  <div class="text-right">
+                    <p class="text-sm text-gray-500"><%= number_to_percentage(pair_stats[:win_rate] * 100, precision: 1) %></p>
+                    <p class="text-xs text-gray-400">(<%= pair_stats[:total_trades] %> trades)</p>
+                  </div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>

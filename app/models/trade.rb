@@ -15,7 +15,7 @@ class Trade < ApplicationRecord
       high_confidence_win_rate: calculate_confidence_win_rate('high'),
       medium_confidence_win_rate: calculate_confidence_win_rate('medium'),
       low_confidence_win_rate: calculate_confidence_win_rate('low'),
-      best_performing_pair: calculate_best_performing_pair
+      top_performing_pairs: calculate_top_performing_pairs
     }
   end
 
@@ -35,29 +35,28 @@ class Trade < ApplicationRecord
     confidence_wins.to_f / confidence_trades.count
   end
 
-  def self.calculate_best_performing_pair
+  def self.calculate_top_performing_pairs
     pairs = select(:pair)
            .group(:pair)
            .having('count(*) >= 3') # Only consider pairs with at least 3 trades
            .pluck(:pair)
 
-    return { pair: 'N/A', win_rate: 0 } if pairs.empty?
+    return [{ pair: 'N/A', win_rate: 0, total_trades: 0 }] if pairs.empty?
 
-    best_pair = pairs.max_by do |pair|
+    pairs_with_stats = pairs.map do |pair|
       pair_trades = where(pair: pair)
       pair_wins = pair_trades.where(result: 'win').count
-      pair_wins.to_f / pair_trades.count
+      win_rate = pair_wins.to_f / pair_trades.count
+
+      {
+        pair: pair,
+        win_rate: win_rate,
+        total_trades: pair_trades.count
+      }
     end
 
-    pair_trades = where(pair: best_pair)
-    pair_wins = pair_trades.where(result: 'win').count
-    win_rate = pair_wins.to_f / pair_trades.count
-
-    {
-      pair: best_pair,
-      win_rate: win_rate,
-      total_trades: pair_trades.count
-    }
+    # Sort by win rate in descending order and take top 3
+    pairs_with_stats.sort_by { |stats| -stats[:win_rate] }.first(3)
   end
 
   def update_profit_counter
