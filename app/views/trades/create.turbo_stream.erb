@@ -1,0 +1,2 @@
+<%= turbo_stream.replace "trade_form", partial: "trades/form", locals: { trade: @trade } %>
+<%= turbo_stream.update "trade_metrics", partial: "dashboard/trade_metrics", locals: { metrics: @metrics } %>

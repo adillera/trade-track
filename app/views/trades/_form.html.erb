@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "trade_form" do %>
-  <%= form_with(model: @trade, url: trades_path, class: "max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-sm border border-gray-100") do |form| %>
+  <%= form_with(model: @trade, url: trades_path, class: "max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-sm border border-gray-100", data: { turbo: true }) do |form| %>
     <% if @trade.errors.any? %>
       <div class="mb-6 bg-red-50 p-4 rounded-lg border border-red-100">
         <h2 class="text-red-800 text-sm font-semibold flex items-center gap-2">

@@ -4,9 +4,7 @@ class TradesController < ApplicationController
 
     if @trade.save
       @trade = Trade.new
-      render turbo_stream: turbo_stream.replace("trade_form", partial: "trades/form", locals: { trade: @trade })
-    else
-      render turbo_stream: turbo_stream.replace("trade_form", partial: "trades/form", locals: { trade: @trade })
+      @metrics = Trade.metrics
     end
   end
 
