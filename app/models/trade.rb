@@ -25,15 +25,8 @@ class Trade < ApplicationRecord
 
   def update_profit_counter
     previous_total = self.class.order(created_at: :desc).first&.profit_counter || 0
-    current_profit = if result == 'win'
-                      amount
-                    elsif result == 'loss'
-                      -amount
-                    else
-                      0
-                    end
     
-    self.profit_counter = previous_total + current_profit
+    self.profit_counter = previous_total + amount
   end
 
   def update_rate_counters
