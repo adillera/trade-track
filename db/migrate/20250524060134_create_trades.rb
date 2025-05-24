@@ -8,10 +8,6 @@ class CreateTrades < ActiveRecord::Migration[8.0]
       t.string :confidence
       t.string :result
       t.decimal :amount
-      t.decimal :profit
-      t.decimal :win_rate
-      t.decimal :loss_rate
-      t.decimal :profit_factor
 
       t.timestamps
     end
